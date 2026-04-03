@@ -7,4 +7,9 @@ import Specialties from './components/Specialties'
 import JoinAsDoctor from './components/JoinAsDoctor'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
-export default function App(){return(<><Navbar/><main><Hero/><Stats/><Features/><HowItWorks/><Specialties/><JoinAsDoctor/><CTA/></main><Footer/></>)}
+import DoctorRegister from './pages/DoctorRegister'
+const path=window.location.pathname
+export default function App(){
+if(path==='/doctor-register')return <DoctorRegister/>
+return(<><Navbar/><main><Hero/><Stats/><Features/><HowItWorks/><Specialties/><JoinAsDoctor/><CTA/></main><Footer/></>)
+}
