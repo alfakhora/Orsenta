@@ -1,0 +1,3 @@
+import s from './HowItWorks.module.css'
+const ST=[{n:'1',t:'Create your account',d:'Sign up in minutes. Share basic health info so your doctor can prepare.'},{n:'2',t:'Choose a doctor',d:'Browse verified specialists by condition, language, or availability.'},{n:'3',t:'Start your consultation',d:'Join your video call and get expert care from home.'}]
+export default function HowItWorks(){return(<section id="how" className={s.s}><div className={s.i}><span className={s.l}>How it works</span><h2>Care in <em>three steps</em></h2><p className={s.sub}>Getting healthcare should not be complicated.</p><div className={s.g}>{ST.map(st=><div key={st.n} className={s.step}><div className={s.num}>{st.n}</div><h3>{st.t}</h3><p>{st.d}</p></div>)}</div></div></section>)}

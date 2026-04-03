@@ -1,0 +1,5 @@
+.strip{background:linear-gradient(135deg,#1a5fa8,#1D9E75);padding:3rem 5%;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap}
+.stat{text-align:center;color:#fff;display:flex;flex-direction:column;gap:4px}
+.num{font-family:Georgia,serif;font-size:2.5rem;font-weight:600;letter-spacing:-1px}
+.lbl{font-size:.85rem;opacity:.85}
+@media(max-width:600px){.strip{gap:2rem;padding:2.5rem 1.5rem}}

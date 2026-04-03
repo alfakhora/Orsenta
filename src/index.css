@@ -1,0 +1,5 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:sans-serif;color:#0d2340;background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none}
