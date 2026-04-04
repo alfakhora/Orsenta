@@ -1,0 +1,69 @@
+.pg{min-height:100vh;background:#f0f7ff;font-family:sans-serif;color:#0d2340;padding-bottom:4rem}
+.hdr{background:linear-gradient(135deg,#0d2340,#1a5fa8);color:#fff;text-align:center;padding:2.5rem 1.5rem 3rem}
+.logo{display:inline-block;font-family:Georgia,serif;font-size:1.4rem;font-weight:700;color:#fff;text-decoration:none;margin-bottom:1.5rem}
+.logo span{display:block;font-size:.6rem;color:#1D9E75;letter-spacing:2px;text-transform:uppercase}
+.hdr h1{font-family:Georgia,serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:300;margin-bottom:.5rem}
+.hdr p{opacity:.8;font-size:1rem}
+.ts{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
+.ts h2{font-family:Georgia,serif;font-size:1.8rem;font-weight:300;text-align:center;margin-bottom:.5rem}
+.tsub{text-align:center;color:#6B7280;margin-bottom:2.5rem}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem}
+.tc{background:#fff;border-radius:1.25rem;padding:2rem;border:2px solid #dbeafe;cursor:pointer;transition:all .2s}
+.tc:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(26,95,168,.12)}
+.tca{box-shadow:0 12px 40px rgba(26,95,168,.2)}
+.ti{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.75rem}
+.tb{display:inline-block;font-size:.75rem;font-weight:600;padding:.25rem .75rem;border-radius:1rem;margin-bottom:.75rem}
+.tc h3{font-size:1.1rem;font-weight:600;margin-bottom:.5rem}
+.td{font-size:.85rem;color:#6B7280;line-height:1.5;margin-bottom:1.25rem}
+.tp{background:#f8faff;border-radius:.75rem;padding:1rem;margin-bottom:1.25rem}
+.pr{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:.4rem;color:#6B7280}
+.pb{display:flex;justify-content:space-between;font-size:.85rem;padding-top:.6rem;border-top:1px dashed #dbeafe;margin-top:.4rem}
+.rq{list-style:none;margin-bottom:1.5rem}
+.rq li{font-size:.82rem;color:#4B5563;padding:.25rem 0;display:flex;gap:.5rem;line-height:1.4}
+.si{text-align:center;padding:.6rem;border-radius:.6rem;font-size:.85rem;font-weight:500;background:#f0f7ff;color:#6B7280;border:1px solid #dbeafe;transition:all .2s}
+.sis{color:#fff!important;border:none}
+.nb{display:block;width:100%;max-width:400px;margin:0 auto;padding:1rem 2rem;border-radius:2rem;border:none;font-size:1rem;font-weight:500;color:#fff;cursor:pointer}
+.nb:disabled{background:#9CA3AF!important;cursor:not-allowed}
+.fm{max-width:800px;margin:0 auto;padding:2rem 1.5rem}
+.fh{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+.tbs{color:#fff;padding:.4rem 1rem;border-radius:1rem;font-size:.85rem;font-weight:500}
+.bk{background:none;border:1px solid #dbeafe;color:#1a5fa8;padding:.4rem 1rem;border-radius:1rem;cursor:pointer;font-size:.85rem}
+.sc{background:#fff;border-radius:1.25rem;padding:2rem;margin-bottom:1.5rem;border:1px solid #dbeafe}
+.sc h3{font-size:1rem;font-weight:600;color:#0d2340;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #f0f7ff}
+.rw{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.f{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.f label{font-size:.82rem;font-weight:500;color:#374151}
+.f input,.f select,.f textarea{padding:.7rem .9rem;border:1px solid #dbeafe;border-radius:.6rem;font-size:.9rem;font-family:sans-serif;background:#fff;color:#0d2340;outline:none;transition:border-color .2s;width:100%}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:#1a5fa8}
+.f textarea{resize:vertical}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.5rem}
+.cl{display:flex;align-items:center;gap:.5rem;font-size:.85rem;cursor:pointer;padding:.4rem .6rem;border-radius:.5rem;transition:background .15s}
+.cl:hover{background:#f0f7ff}
+.cl input{accent-color:#1a5fa8}
+.ug{display:flex;flex-direction:column;gap:.75rem}
+.ub{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border:1.5px dashed #dbeafe;border-radius:.75rem;cursor:pointer;position:relative;transition:all .2s;background:#fafcff}
+.ub:hover{border-color:#1a5fa8;background:#f0f7ff}
+.ubd{border-color:#1D9E75;background:#e8f5e9;border-style:solid}
+.ui{font-size:1.3rem;flex-shrink:0}
+.ul{font-size:.88rem;font-weight:500;color:#0d2340;margin-bottom:2px}
+.uh{font-size:.78rem;color:#9CA3AF}
+.uf{font-size:.78rem;color:#1D9E75;font-weight:500}
+.fi{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.sum{border:1.5px solid;border-radius:1rem;padding:1.5rem}
+.sum h3{font-size:1rem;font-weight:600;margin-bottom:1rem}
+.sr{display:flex;justify-content:space-between;font-size:.88rem;padding:.5rem 0;border-bottom:1px solid rgba(0,0,0,.06);color:#4B5563}
+.sr:last-child{border:none}
+.ag{display:flex;align-items:flex-start;gap:.75rem;font-size:.85rem;line-height:1.5;color:#4B5563;margin-bottom:1rem;cursor:pointer}
+.ag input{margin-top:3px;flex-shrink:0;accent-color:#1a5fa8}
+.sb{display:block;width:100%;padding:1.1rem;border-radius:.75rem;border:none;font-size:1rem;font-weight:500;color:#fff;cursor:pointer;transition:opacity .2s;margin-top:.5rem}
+.sb:hover{opacity:.9}
+.ok{max-width:600px;margin:4rem auto;padding:3rem 2rem;background:#fff;border-radius:1.5rem;text-align:center;border:1px solid #dbeafe}
+.okIcon{width:72px;height:72px;border-radius:50%;color:#fff;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.ok h2{font-family:Georgia,serif;font-size:1.6rem;font-weight:400;margin-bottom:.75rem}
+.ok>p{color:#6B7280;font-size:.95rem;line-height:1.6;margin-bottom:2rem}
+.steps{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;text-align:left}
+.stp{display:flex;gap:1rem;align-items:flex-start}
+.stp span{width:28px;height:28px;border-radius:50%;background:#f0f7ff;color:#1a5fa8;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stp p{font-size:.88rem;color:#4B5563;line-height:1.5}
+@media(max-width:900px){.tg{grid-template-columns:1fr}}
+@media(max-width:640px){.rw{grid-template-columns:1fr}.fm{padding:1rem}.cg{grid-template-columns:1fr 1fr}}
