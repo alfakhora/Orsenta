@@ -1,0 +1,41 @@
+.pg{min-height:100vh;background:#f0f7ff;font-family:sans-serif;color:#0d2340}
+.nav{background:#0d2340;padding:1rem 5%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:Georgia,serif;font-size:1.2rem;font-weight:700;color:#fff;text-decoration:none}
+.logo span{display:block;font-size:.55rem;color:#1D9E75;letter-spacing:2px;text-transform:uppercase}
+.navRight{display:flex;align-items:center;gap:1rem}
+.navEmail{color:rgba(255,255,255,.6);font-size:.82rem}
+.logoutBtn{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);padding:.4rem .9rem;border-radius:1rem;cursor:pointer;font-size:.82rem;transition:background .2s}
+.logoutBtn:hover{background:rgba(255,255,255,.2)}
+.content{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem}
+.loading{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:#f0f7ff}
+.spinner{width:40px;height:40px;border:3px solid #dbeafe;border-top-color:#1a5fa8;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading p{color:#6B7280;font-size:.9rem}
+.welcome{margin-bottom:1.5rem}
+.welcome h1{font-family:Georgia,serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:400;color:#0d2340;margin-bottom:.3rem}
+.welcome p{color:#6B7280;font-size:.95rem}
+.statusBanner{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;border-radius:1rem;border:1.5px solid;margin-bottom:2rem}
+.statusDot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.statusBanner strong{display:block;font-size:.95rem;margin-bottom:3px}
+.statusBanner p{font-size:.85rem;color:#6B7280;margin:0;line-height:1.5}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.card{background:#fff;border-radius:1rem;padding:1.25rem;border:1px solid #dbeafe}
+.cardLabel{font-size:.78rem;color:#6B7280;display:block;margin-bottom:.4rem;font-weight:500}
+.cardValue{font-family:Georgia,serif;font-size:1.6rem;font-weight:600;color:#0d2340}
+.details{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:1.5rem}
+.detailCard{background:#fff;border-radius:1rem;padding:1.75rem;border:1px solid #dbeafe}
+.detailCard h3{font-size:.9rem;font-weight:600;color:#0d2340;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #f0f7ff;text-transform:uppercase;letter-spacing:.5px}
+.detailGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.detailItem span{display:block;font-size:.78rem;color:#9CA3AF;margin-bottom:3px}
+.detailItem strong{font-size:.9rem;color:#0d2340}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.tag{padding:.35rem .85rem;border-radius:1rem;font-size:.82rem;font-weight:500}
+.bio{font-size:.9rem;color:#4B5563;line-height:1.7}
+.submitted{text-align:center;font-size:.8rem;color:#9CA3AF;padding-top:1rem}
+.noApp{text-align:center;padding:5rem 2rem}
+.noAppIcon{width:64px;height:64px;border-radius:50%;background:#dbeafe;color:#1a5fa8;font-size:1.5rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.noApp h2{font-family:Georgia,serif;font-size:1.4rem;font-weight:400;margin-bottom:.5rem}
+.noApp p{color:#6B7280;margin-bottom:1.5rem}
+.applyBtn{display:inline-block;background:linear-gradient(135deg,#1a5fa8,#1D9E75);color:#fff;padding:.85rem 2rem;border-radius:2rem;text-decoration:none;font-weight:500}
+@media(max-width:768px){.cards{grid-template-columns:1fr 1fr}.detailGrid{grid-template-columns:1fr}.navEmail{display:none}}
+@media(max-width:480px){.cards{grid-template-columns:1fr}}

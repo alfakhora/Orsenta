@@ -1,76 +1,45 @@
-import { useState } from 'react'
-import { supabase } from '../lib/supabase.js'
+import{useState}from 'react'
+import{supabase}from '../lib/supabase'
 import s from './DoctorRegister.module.css'
-
-const T=[{id:'gp',name:'General Practitioner',short:'GP',color:'#1D9E75'},{id:'registrar',name:'Registrar / Specialist',short:'Registrar',color:'#1a5fa8'},{id:'consultant',name:'Consultant',short:'Consultant',color:'#7C3AED'}]
-
+const T=[{id:'gp',name:'General Practitioner',short:'GP',regFee:0,meetingFee:3,doctorShare:2,siteShare:1,color:'#1D9E75',icon:'GP',desc:'MBBS or equivalent. Primary care consultations.',reqs:['Medical degree (MBBS, MBChB, MD or equivalent)','Valid medical license','Minimum 1 year clinical experience','Government-issued ID'],docs:[{id:'degree',label:'Medical Degree Certificate'},{id:'license',label:'Medical License / Registration'},{id:'id',label:'Government-issued ID'},{id:'photo',label:'Professional Profile Photo'}]},{id:'registrar',name:'Registrar / Specialist',short:'Registrar',regFee:2,meetingFee:6,doctorShare:4,siteShare:2,color:'#1a5fa8',icon:'RS',desc:'Specialty training completed. Mid-level specialist care.',reqs:['Medical degree + specialty diploma','Specialty board registration','Minimum 3 years experience','Government-issued ID'],docs:[{id:'degree',label:'Medical Degree Certificate'},{id:'specialty',label:'Specialty Diploma / Residency Certificate'},{id:'license',label:'Medical License and Specialty Registration'},{id:'experience',label:'Proof of 3+ Years Experience'},{id:'id',label:'Government-issued ID'},{id:'photo',label:'Professional Profile Photo'}]},{id:'consultant',name:'Consultant',short:'Consultant',regFee:5,meetingFee:10,doctorShare:7,siteShare:3,color:'#7C3AED',icon:'CN',desc:'Board-certified consultant. Senior specialist care.',reqs:['Full specialty board certification (FRCS, MRCP, FACP)','Minimum 5 years post-specialty experience','Hospital appointment or academic position','Two professional references'],docs:[{id:'degree',label:'Medical Degree Certificate'},{id:'board',label:'Board Certification'},{id:'license',label:'Full Medical License'},{id:'appointment',label:'Hospital Appointment Letter'},{id:'experience',label:'CV with 5+ Years Evidence'},{id:'references',label:'Two Reference Letters'},{id:'id',label:'Government-issued ID'},{id:'photo',label:'Professional Profile Photo'}]}]
+const SP=['General Practice','Cardiology','Dermatology','Endocrinology','Gastroenterology','Gynecology','Hematology','Internal Medicine','Nephrology','Neurology','Oncology','Ophthalmology','Orthopedics','Pediatrics','Psychiatry','Pulmonology','Rheumatology','Surgery','Urology','Other']
+const LG=['English','Arabic','French','Spanish','German','Portuguese','Urdu','Hindi','Turkish','Swahili','Other']
 export default function DoctorRegister(){
-  const[step,setStep]=useState(1);
-  const[sel,setSel]=useState(null);
-  const[done,setDone]=useState(false);
-  const[loading,setLoading]=useState(false);
-  const[form,setForm]=useState({fn:'',ln:'',email:'',password:'',spec:'',lic:''});
-
-  const h=e=>setForm({...form,[e.target.name]:e.target.value});
-  const tier=T.find(t=>t.id===sel) || T[0];
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: form.email,
-        password: form.password,
-      });
-      if (authError) throw authError;
-
-      const { error: dbError } = await supabase
-        .from('doctor_applications')
-        .insert([{
-          user_id: authData.user.id,
-          first_name: form.fn,
-          last_name: form.ln,
-          email: form.email,
-          tier: sel,
-          specialty: form.spec,
-          license_number: form.lic,
-          status: 'pending'
-        }]);
-      if (dbError) throw dbError;
-      setDone(true);
-    } catch (err) { alert(err.message); }
-    finally { setLoading(false); }
-  };
-
-  if(done) return <div style={{padding:'100px', textAlign:'center', fontFamily:'sans-serif'}}><h2>Check your email!</h2><p>Click the link in the email to activate your account, then <a href="/login">Login</a>.</p></div>;
-
-  return (
-    <div className={s.pg} style={{padding:'20px', fontFamily:'sans-serif'}}>
-      {step === 1 ? (
-        <div style={{maxWidth:'600px', margin:'0 auto'}}>
-          <h2>Select your Tier</h2>
-          {T.map(t=>(
-            <div key={t.id} onClick={()=>{setSel(t.id);setStep(2)}} style={{border:'1px solid #ddd', margin:'10px 0', padding:'20px', borderRadius:'10px', cursor:'pointer', background:'white'}}>
-              <h3 style={{color:t.color, margin:0}}>{t.name}</h3>
-              <p style={{margin:'5px 0 0 0', color:'#666'}}>Apply as a {t.short}</p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <form onSubmit={handleRegister} style={{maxWidth:'400px', margin:'0 auto', display:'flex', flexDirection:'column', gap:'10px'}}>
-          <button type="button" onClick={()=>setStep(1)} style={{alignSelf:'flex-start'}}>← Back</button>
-          <h3>Register as {tier.name}</h3>
-          <input name="fn" placeholder="First Name" onChange={h} required style={{padding:'10px'}} />
-          <input name="ln" placeholder="Last Name" onChange={h} required style={{padding:'10px'}} />
-          <input name="email" type="email" placeholder="Email" onChange={h} required style={{padding:'10px'}} />
-          <input name="password" type="password" placeholder="Password" onChange={h} required style={{padding:'10px'}} />
-          <input name="spec" placeholder="Specialty (e.g. Cardiology)" onChange={h} required style={{padding:'10px'}} />
-          <input name="lic" placeholder="License Number" onChange={h} required style={{padding:'10px'}} />
-          <button type="submit" disabled={loading} style={{background:tier.color, color:'white', border:'none', padding:'15px', borderRadius:'5px', fontWeight:'bold'}}>
-            {loading ? 'Processing...' : 'Submit Application'}
-          </button>
-        </form>
-      )}
-    </div>
-  )
+const[step,setStep]=useState(1)
+const[sel,setSel]=useState(null)
+const[done,setDone]=useState(false)
+const[loading,setLoading]=useState(false)
+const[error,setError]=useState('')
+const[form,setForm]=useState({fn:'',ln:'',email:'',password:'',phone:'',country:'',city:'',spec:'',subspec:'',lic:'',licAuth:'',exp:'',langs:[],avail:[],bio:'',t1:false,t2:false})
+const h=e=>{const{name,value,type,checked}=e.target;if(type==='checkbox'&&(name==='langs'||name==='avail')){setForm(f=>({...f,[name]:checked?[...f[name],value]:f[name].filter(x=>x!==value)}))}else setForm(f=>({...f,[name]:type==='checkbox'?checked:value}))}
+const tier=T.find(t=>t.id===sel)
+const sub=async e=>{
+e.preventDefault();setLoading(true);setError('')
+try{
+const{data:authData,error:authError}=await supabase.auth.signUp({email:form.email,password:form.password,options:{data:{first_name:form.fn,last_name:form.ln,role:'doctor'}}})
+if(authError)throw authError
+const{error:dbError}=await supabase.from('doctor_applications').insert([{auth_user_id:authData?.user?.id,first_name:form.fn,last_name:form.ln,email:form.email,phone:form.phone,country:form.country,city:form.city,tier:sel,tier_name:tier.name,specialty:form.spec,sub_specialty:form.subspec,license_number:form.lic,license_authority:form.licAuth,years_experience:form.exp,languages:form.langs,availability:form.avail,bio:form.bio,status:'pending',meeting_fee:tier.meetingFee,doctor_share:tier.doctorShare,site_share:tier.siteShare}])
+if(dbError)throw dbError
+setDone(true)
+}catch(err){setError(err.message)}
+setLoading(false)
+}
+if(done)return(<div className={s.pg}><div className={s.ok}><div className={s.okIcon} style={{background:tier.color}}>OK</div><h2>Application Submitted!</h2><p>Thank you Dr. {form.fn} {form.ln}. Your {tier.name} application is under review.</p><div className={s.steps}><div className={s.stp}><span>1</span><p>Documents reviewed within <strong>3-5 business days</strong></p></div>{tier.regFee>0&&<div className={s.stp}><span>2</span><p>Payment link for <strong>${tier.regFee} registration fee</strong> sent by email</p></div>}<div className={s.stp}><span>{tier.regFee>0?3:2}</span><p>Login credentials activated upon approval</p></div></div><a href="/login" className={s.loginLink}>Go to Login</a></div></div>)
+return(<div className={s.pg}>
+<div className={s.hdr}><a href="/" className={s.logo}>ORSENTA<span>Your TeleDoctor</span></a><h1>Doctor Registration</h1><p>Join our network of verified medical professionals</p></div>
+{step===1&&<div className={s.ts}><h2>Choose your doctor tier</h2><p className={s.tsub}>Select the tier matching your qualifications.</p><div className={s.tg}>{T.map(t=><div key={t.id} className={`${s.tc} ${sel===t.id?s.tca:''}`} onClick={()=>setSel(t.id)} style={sel===t.id?{borderColor:t.color}:{}}><div className={s.ti} style={{background:t.color+'18',color:t.color,fontWeight:700}}>{t.icon}</div><div className={s.tb} style={{background:t.color+'18',color:t.color}}>{t.short}</div><h3 style={{color:t.color}}>{t.name}</h3><p className={s.td}>{t.desc}</p><div className={s.tp}><div className={s.pr}><span>Registration</span><strong style={{color:t.color}}>{t.regFee===0?'FREE':'$'+t.regFee}</strong></div><div className={s.pr}><span>Per consultation</span><strong>${t.meetingFee}</strong></div><div className={s.pb}><span>You earn</span><span style={{color:t.color,fontWeight:600}}>${t.doctorShare}/meeting</span></div></div><ul className={s.rq}>{t.reqs.map((r,i)=><li key={i}><span style={{color:t.color}}>v</span> {r}</li>)}</ul><div className={`${s.si} ${sel===t.id?s.sis:''}`} style={sel===t.id?{background:t.color}:{}}>{sel===t.id?'Selected':'Select'}</div></div>)}</div><button className={s.nb} disabled={!sel} onClick={()=>setStep(2)} style={sel?{background:tier.color}:{}}>Continue with {sel?tier.name:'a tier'}</button></div>}
+{step===2&&tier&&<form className={s.fm} onSubmit={sub}>
+<div className={s.fh}><div className={s.tbs} style={{background:tier.color}}>{tier.name}</div><button type="button" className={s.bk} onClick={()=>setStep(1)}>Change tier</button></div>
+{error&&<div className={s.err}>{error}</div>}
+<div className={s.sc}><h3>Account Credentials</h3><div className={s.f}><label>Email address *</label><input type="email" name="email" value={form.email} onChange={h} placeholder="doctor@email.com" required/></div><div className={s.f}><label>Password * (min 6 characters)</label><input type="password" name="password" value={form.password} onChange={h} placeholder="Create a password" required minLength={6}/></div></div>
+<div className={s.sc}><h3>Personal Information</h3><div className={s.rw}><div className={s.f}><label>First name *</label><input name="fn" value={form.fn} onChange={h} placeholder="First name" required/></div><div className={s.f}><label>Last name *</label><input name="ln" value={form.ln} onChange={h} placeholder="Last name" required/></div></div><div className={s.rw}><div className={s.f}><label>Phone</label><input name="phone" value={form.phone} onChange={h} placeholder="+1 234 567 8900"/></div><div className={s.f}><label>Country *</label><input name="country" value={form.country} onChange={h} placeholder="Country" required/></div></div><div className={s.f}><label>City *</label><input name="city" value={form.city} onChange={h} placeholder="City" required/></div></div>
+<div className={s.sc}><h3>Medical Qualifications</h3><div className={s.rw}><div className={s.f}><label>Specialty *</label><select name="spec" value={form.spec} onChange={h} required><option value="">Select</option>{SP.map(x=><option key={x}>{x}</option>)}</select></div><div className={s.f}><label>Sub-specialty</label><input name="subspec" value={form.subspec} onChange={h} placeholder="e.g. Interventional Cardiology"/></div></div><div className={s.rw}><div className={s.f}><label>License number *</label><input name="lic" value={form.lic} onChange={h} placeholder="License number" required/></div><div className={s.f}><label>Licensing authority *</label><input name="licAuth" value={form.licAuth} onChange={h} placeholder="e.g. GMC UK, Saudi MOH" required/></div></div><div className={s.f}><label>Years of experience *</label><select name="exp" value={form.exp} onChange={h} required><option value="">Select</option><option>1-2 years</option><option>3-5 years</option><option>6-10 years</option><option>11-15 years</option><option>20+ years</option></select></div></div>
+<div className={s.sc}><h3>Languages</h3><div className={s.cg}>{LG.map(l=><label key={l} className={s.cl}><input type="checkbox" name="langs" value={l} checked={form.langs.includes(l)} onChange={h}/>{l}</label>)}</div></div>
+<div className={s.sc}><h3>Availability</h3><div className={s.cg}>{['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map(d=><label key={d} className={s.cl}><input type="checkbox" name="avail" value={d} checked={form.avail.includes(d)} onChange={h}/>{d}</label>)}</div></div>
+<div className={s.sc}><h3>Professional Bio</h3><div className={s.f}><label>About you *</label><textarea name="bio" value={form.bio} onChange={h} placeholder="Your experience, approach to patient care, areas of interest..." rows={5} required/></div></div>
+<div className={s.sc}><div className={s.sum} style={{borderColor:tier.color+'60',background:tier.color+'08'}}><h3 style={{color:tier.color}}>Summary</h3><div className={s.sr}><span>Tier</span><strong>{tier.name}</strong></div><div className={s.sr}><span>Registration fee</span><strong style={{color:tier.color}}>{tier.regFee===0?'FREE':'$'+tier.regFee+' after approval'}</strong></div><div className={s.sr}><span>Patient pays per consultation</span><strong>${tier.meetingFee}</strong></div><div className={s.sr}><span>You earn per consultation</span><strong style={{color:tier.color}}>${tier.doctorShare}</strong></div><div className={s.sr}><span>Platform fee</span><strong>${tier.siteShare}</strong></div></div></div>
+<div className={s.sc}><label className={s.ag}><input type="checkbox" name="t1" checked={form.t1} onChange={h} required/><span>I agree to Orsenta Terms of Service and Privacy Policy</span></label><label className={s.ag}><input type="checkbox" name="t2" checked={form.t2} onChange={h} required/><span>I confirm all information and documents are genuine and accurate.</span></label></div>
+<button type="submit" className={s.sb} style={{background:tier.color}} disabled={loading}>{loading?'Submitting...':'Submit Application'}</button>
+</form>}
+</div>)
 }
